@@ -1,0 +1,6 @@
+
+
+fn render(scene : Scene)
+{
+
+}
