@@ -15,6 +15,9 @@ impl Vector4 {
     pub fn new(x : f32, y : f32, z : f32, w : f32) -> Vector4 {
         return Vector4 { x, y, z, w }
     }
+    pub fn zero() -> Vector4 {
+        return Vector4 { x: 0.0, y: 0.0, z: 0.0, w: 0.0 }
+    }
     pub fn from_vector3(vec : &Vector3, w : f32) -> Vector4 {
         return Vector4::new(vec.x, vec.y, vec.z, w)
     }

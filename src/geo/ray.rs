@@ -1,5 +1,6 @@
 use super::Vector3;
 
+#[derive(Copy, Clone)]
 pub struct Ray {
     pub origin : Vector3,
     pub direction : Vector3,

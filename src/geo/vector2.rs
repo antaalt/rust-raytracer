@@ -11,6 +11,9 @@ impl Vector2 {
     pub fn new(x : f32, y : f32) -> Vector2 {
         return Vector2 { x, y }
     }
+    pub fn zero() -> Vector2 {
+        return Vector2 { x: 0.0, y: 0.0 }
+    }
     pub fn distance(&self, other : &Vector2) -> f32 {
         let dx = self.x - other.x;
         let dy = self.y - other.y;

@@ -5,6 +5,16 @@ use crate::geo::Matrix4;
 
 // Camera trait, derive CameraFisheye, CameraParallel, CameraODS ?
 
+pub trait CameraSampler {
+    
+}
+
+pub trait Camera {
+    fn view(&self) -> Matrix4;
+    fn transform(&self) -> Matrix4;
+    fn generate_ray(&self, x : u32, y : u32, w : u32, h : u32) -> Ray;
+}
+
 // TODO inherit transform
 pub struct CameraPerspective {
     pub transform : super::Transform,
@@ -12,13 +22,14 @@ pub struct CameraPerspective {
     pub ratio : f32
 }
 
-impl CameraPerspective {
+impl CameraPerspective 
+{
     pub fn generate_ray(&self, x : u32, y : u32, w : u32, h : u32) -> Ray {
 
         let screen_pos = Vector2::new((x as f32 / w as f32) * 2.0 - 1.0, (y as f32 / h as f32) * 2.0 - 1.0);
         let projection = Matrix4::perspective(self.fov / 180.0 * std::f32::consts::PI, w as f32 / h as f32, 0.1, 1000.0);
 
-        let view_inverse = self.transform.matrix();
+        let view_inverse = self.transform.local_to_world();
         let proj_inverse = projection.inverse();
         
         let cam_pos      = view_inverse.multiply_point(&Vector3::new(0.0, 0.0, 0.0));
@@ -30,11 +41,8 @@ impl CameraPerspective {
             cam_dir.normalize()
         );
     }
-
-    /*pub fn view() {
-
-    }
-    pub fn transform() {
-
-    }*/
 }
+
+/*impl Camera for CameraPerspective {
+
+}*/
